@@ -1,0 +1,253 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital@0;1&display=swap');
+
+::after,
+::before {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 1.5rem;
+}
+
+body {
+    font-family: "Source Sans 3", sans-serif;
+    /* overflow-x: hidden; */
+}
+
+.wrapper {
+    display: flex;
+}
+
+.main {
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    transition: all 0.35s ease-in-out;
+    background-color: #fafbfe;
+}
+
+.container {
+    width: calc(100% - 260px);
+    margin-left: 250px;
+}
+
+#sidebar {
+    width: 250px;
+    min-width: 70px;
+    z-index: 1;
+    transition: all .25s ease-in-out;
+    background-color: #0e2238;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.sidebar-logo {
+    margin: auto 0;
+}
+
+.sidebar-logo-text a {
+    color: #FFF;
+    font-size: 1.15rem;
+    font-weight: 600;
+}
+
+.sidebar-nav {
+    padding: 2rem 0;
+    flex: 1 1 auto;
+}
+
+a.sidebar-link {
+    padding: .625rem 1.625rem;
+    color: #FFF;
+    display: block;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    border-left: 3px solid transparent;
+}
+
+.sidebar-link i {
+    font-size: 1.1rem;
+    margin-right: .75rem;
+}
+
+a.sidebar-link:hover {
+    background-color: rgba(255, 255, 255, .075);
+    border-left: 3px solid #3b7ddd;
+}
+
+.link-active {
+    background-color: rgba(255, 255, 255, .075);
+    border-left: 3px solid #3b7ddd !important;
+}
+
+.sidebar-item {
+    position: relative;
+}
+
+.modal-body {
+    max-height: 400px;
+}
+
+.form-control, .form-select {
+    border-radius: 8px;
+    border-color:rgb(100, 100, 100);
+}
+
+.form-control.select2 {
+    border-radius: 0.25rem !important;
+}
+
+.editable-quantity {
+    border: none;
+    outline: none;
+    cursor: text;
+    text-align: center;
+}
+
+.theme-color {
+    background-color: #0e2238;
+}
+
+.form-border {
+    border-color: black;
+}
+
+.img-preview {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.modal-body {
+    max-height: none !important;
+    overflow-y: auto;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background-color: red;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 5px;
+}
+
+
+#supplier-table td:nth-child(3) {
+    max-width: 150px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#supplier-table {
+    margin-bottom: 10px;
+    font-size: 0.9rem; 
+}
+
+.change-pw-button {
+    margin-top: 3rem;
+}
+
+/* Desktop */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    #sidebar {
+        width: 260px;
+        min-width: 260px;
+    }
+
+    #sidebar .sidebar-link[data-bs-toggle="collapse"]::after {
+        border: solid;
+        border-width: 0 .075rem .075rem 0;
+        content: "";
+        display: inline-block;
+        padding: 2px;
+        position: absolute;
+        right: 1.5rem;
+        top: 1.4rem;
+        transform: rotate(-135deg);
+        transition: all .2s ease-out;
+    }
+    
+    #sidebar .sidebar-link[data-bs-toggle="collapse"].collapsed::after {
+        transform: rotate(45deg);
+        transition: all .2s ease-out;
+    }
+
+    .change-pw-button {
+        margin-top: 26px;
+    }
+}
+
+/* Android */
+@media only screen and (max-width: 767px) {
+    .change-pw-button {
+        margin-top: 26px;
+    }
+
+    #sidebar .sidebar-item .sidebar-dropdown {
+        position: absolute;
+        top: 0;
+        left: 70px;
+        background-color: #0e2238;
+        padding: 0;
+        min-width: 15rem;
+        display: none;
+    }
+    
+    #sidebar {
+        width: 70px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    #sidebar .sidebar-item:hover .has-dropdown+.sidebar-dropdown {
+        display: block;
+        max-height: 15em;
+        width: 100%;
+        opacity: 1;
+    }
+
+    #sidebar a.sidebar-link span {
+        display: none;
+    }
+
+    #sidebar .sidebar-logo img {
+        width: 30px;
+        height: auto;
+    }
+
+    #sidebar .sidebar-logo-text {
+        display: none;
+    }
+
+    .sidebar-header {
+        padding: 7px;
+    }
+
+    .container {
+        width: 100%;
+        margin-left: 50px;
+    }
+
+    .header {
+        width: 100vh;
+    }
+}
