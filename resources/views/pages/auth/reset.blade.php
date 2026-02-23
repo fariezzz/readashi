@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
     <link rel="icon" type="image/png" href="{{ asset('logo/favicon.png') }}" />
-    <title>Bookhaven | Reset Password</title>
+    <title>Readashi | Reset Password</title>
 </head>
 <body>
   <div class="container d-flex justify-content-center align-items-center min-vh-100" style="width: 50%">

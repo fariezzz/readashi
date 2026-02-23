@@ -8,14 +8,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
     <link rel="icon" type="image/png" href="{{ asset('logo/favicon.png') }}" />
-    <title>Bookhaven | Login</title>
+    <title>Readashi | Login</title>
 </head>
 <body>
   <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="row border rounded-5 p-3 bg-white shadow box-area">
       <div class="col-md-6 rounded-4 d-flex justify-content-center align-items-center flex-column left-box" style="background: #0e2238;">
         <div class="featured-image mb-3">
-          <img src="{{ asset('logo/logo-white-no-bg.png') }}" class="img-fluid" style="width: 300px;">
+          <img src="{{ asset('logo/readashi-brand.png') }}" class="img-fluid" style="width: 300px;">
         </div>
       </div> 
         
