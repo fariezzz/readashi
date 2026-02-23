@@ -2,10 +2,10 @@
     <aside id="sidebar">
         <div class="d-flex container-fluid mt-3 sidebar-header">
             <div class="sidebar-logo mx-3">
-                <a href="/"><img src="{{ asset('logo/bookhaven-logo.png') }}" width="50" height="auto" alt=""></a>
+                <a href="/"><img src="{{ asset('logo/logo.png') }}" width="50" height="auto" alt=""></a>
             </div>
-            <div class="sidebar-logo-text mt-3">
-                <a href="/">BookHaven</a>
+            <div class="sidebar-logo-text brand-font mt-3">
+                <a href="/">Readashi</a>
             </div>
         </div>
         <ul class="sidebar-nav py-3">
@@ -52,6 +52,13 @@
                 <a href="/customer" class="sidebar-link {{ Request::is('customer*') ? 'link-active' : '' }}">
                     <i class="bi bi-people-fill"></i>
                     <span>Customers</span>
+                </a>
+            </li>
+
+            <li class="sidebar-item">
+                <a href="/borrowing" class="sidebar-link {{ Request::is('borrowing*') ? 'link-active' : '' }}">
+                    <i class="bi bi-journal-bookmark-fill"></i>
+                    <span>Borrowings</span>
                 </a>
             </li>
         </ul>

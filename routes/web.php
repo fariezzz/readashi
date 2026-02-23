@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BorrowingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
@@ -56,5 +57,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/product', ProductController::class);
     
     Route::resource('/customer', CustomerController::class);
-    
+    Route::resource('/borrowing', BorrowingController::class);
 });                                                

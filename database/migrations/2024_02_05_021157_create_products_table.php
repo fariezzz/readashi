@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('code')->unique();
             $table->string('description')->nullable();
-            $table->date('expired_date')->nullable();
             $table->integer('stock');
             $table->decimal('price', 10,2);
             $table->string('image')->nullable();

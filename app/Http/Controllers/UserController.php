@@ -67,7 +67,7 @@ class UserController extends Controller
 
         if($request->file('image')){
             if($user->image){
-                Storage::delete($user->image);
+                Storage::disk('public')->delete($user->image);
             }
             $validatedData['image'] = $request->file('image')->store('user-images', 'public');
         }

@@ -19,17 +19,11 @@ class DatabaseSeeder extends Seeder
     {
         Customer::factory(8)->create();
 
-        Category::create([
-            'name' => 'Education',
-            'slug' => 'education'
-        ]);
+        $this->call(CategorySeeder::class);
 
-        Category::create([
-            'name' => 'Tales',
-            'slug' => 'tales'
-        ]);
+        Product::factory(10)->create();
 
-        User::factory(10)->create();
+        User::factory(5)->create();
         
         User::factory()->create([
             'name' => 'Muhammad Fariez',
@@ -47,6 +41,5 @@ class DatabaseSeeder extends Seeder
             'role' => 'Cashier'
         ]);
 
-        Product::factory(100)->create();
     }
 }
