@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use App\Models\Manga;
+use App\Models\Member;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,7 +17,7 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call(GenreSeeder::class);
-        
+
         User::factory()->create([
             'name' => 'Muhammad Fariez',
             'email' => 'cihils46@gmail.com',
@@ -32,6 +33,10 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('12345'),
             'role' => 'Staff'
         ]);
+
+        // Dummy data users dan members
+        User::factory(20)->create();
+        Member::factory(30)->create();
 
         Manga::factory(40)->create();
     }
