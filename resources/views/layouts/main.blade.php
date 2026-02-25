@@ -36,23 +36,47 @@
             $('#logoutForm').submit();
         });
 
-        function previewImage() {
-            const image = document.querySelector('#image');
-            const imgPreview = document.querySelector('.img-preview');
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+        }
 
-            if (image.files.length === 0) {
-                imgPreview.style.display = 'none';
+        function previewImage(input) {
+            const imageInput = input || document.querySelector('#image');
+            const imgPreview = document.querySelector('.img-preview');
+            const fileInfo = document.querySelector('.file-info');
+            const initialSrc = imgPreview ? imgPreview.dataset.initialSrc : '';
+
+            if (!imageInput || !imgPreview) return;
+
+            if (!imageInput.files || imageInput.files.length === 0) {
+                if (fileInfo) {
+                    fileInfo.textContent = 'Belum ada file dipilih.';
+                }
+
+                if (initialSrc) {
+                    imgPreview.src = initialSrc;
+                    imgPreview.style.display = 'block';
+                } else {
+                    imgPreview.src = '';
+                    imgPreview.style.display = 'none';
+                }
                 return;
             }
 
-            imgPreview.style.display = 'block';
-
-            const oFReader = new FileReader();
-            oFReader.readAsDataURL(image.files[0]);
-
-            oFReader.onload = function(oFREvent) {
-                imgPreview.src = oFREvent.target.result;
+            const selectedFile = imageInput.files[0];
+            if (fileInfo) {
+                fileInfo.textContent = `${selectedFile.name} (${formatFileSize(selectedFile.size)})`;
             }
+
+            const reader = new FileReader();
+            reader.readAsDataURL(selectedFile);
+
+            reader.onload = function(event) {
+                imgPreview.src = event.target.result;
+                imgPreview.style.display = 'block';
+            };
         }
 
         $(document).ready(function() {

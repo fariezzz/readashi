@@ -62,12 +62,14 @@
 
         <div class="col-lg-6">
           <label for="image" class="form-label">Image</label>
-          <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" onchange="previewImage()">
+          <input class="form-control @error('image') is-invalid @enderror" type="file" id="image" name="image" accept="image/*" onchange="previewImage(this)">
+          <div class="form-text">Format: JPG, PNG, WEBP. Maksimal 1MB.</div>
+          <small class="text-muted d-block mt-1 file-info">Belum ada file dipilih.</small>
           @error('image') <div class="invalid-feedback">{{ $message }}</div> @enderror
         </div>
 
         <div class="col-lg-12">
-          <img class="img-preview img-fluid col-lg-12">
+          <img class="img-preview img-fluid rounded border p-1 mt-1" style="max-height: 320px; display:none;" data-initial-src="">
         </div>
 
         <div class="col-12 mb-5">
