@@ -2,13 +2,13 @@
 
 namespace Database\Factories;
 
-use App\Models\Category;
+use App\Models\Genre;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Manga>
  */
-class ProductFactory extends Factory
+class MangaFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,13 +18,18 @@ class ProductFactory extends Factory
     public function definition(): array
     {
         return [
-            'category_id' => Category::query()->inRandomOrder()->value('id') ?? 1,
+            'genre_id' => Genre::query()->inRandomOrder()->value('id') ?? 1,
             'name' => fake()->sentence(4, true),
             'code' => fake()->unique()->numerify('###########'),
-            'description' => fake()->optional()->sentence(),
+            'author' => fake()->name(),
+            'publisher' => fake()->optional()->company(),
+            'published_year' => fake()->optional()->numberBetween(1980, (int) date('Y')),
+            'synopsis' => fake()->optional()->sentence(),
             'stock' => fake()->numberBetween(1, 50),
-            'price' => fake()->numberBetween(10000, 250000),
             'image' => null,
         ];
     }
 }
+
+
+

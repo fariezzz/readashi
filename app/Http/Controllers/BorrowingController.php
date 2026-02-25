@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Borrowing;
-use App\Models\Customer;
-use App\Models\Product;
+use App\Models\Member;
+use App\Models\Manga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
@@ -17,7 +17,7 @@ class BorrowingController extends Controller
     {
         return view('pages.borrowing.index', [
             'title' => 'Borrowing List',
-            'borrowings' => Borrowing::with(['customer', 'product'])->latest()->get()
+            'borrowings' => Borrowing::with(['member', 'manga'])->latest()->get()
         ]);
     }
 
@@ -32,8 +32,8 @@ class BorrowingController extends Controller
 
         return view('pages.borrowing.create', [
             'title' => 'Add Borrowing',
-            'customers' => Customer::all(),
-            'products' => Product::all()
+            'members' => Member::all(),
+            'mangas' => Manga::all()
         ]);
     }
 
@@ -47,8 +47,8 @@ class BorrowingController extends Controller
         }
 
         $validatedData = $request->validate([
-            'customer_id' => 'required|exists:customers,id',
-            'product_id' => 'required|exists:products,id',
+            'member_id' => 'required|exists:members,id',
+            'manga_id' => 'required|exists:mangas,id',
             'borrow_date' => 'required|date',
             'due_date' => 'required|date|after_or_equal:borrow_date',
             'return_date' => 'nullable|date|after_or_equal:borrow_date',
@@ -83,8 +83,8 @@ class BorrowingController extends Controller
         return view('pages.borrowing.edit', [
             'title' => 'Edit Borrowing',
             'borrowing' => $borrowing,
-            'customers' => Customer::all(),
-            'products' => Product::all()
+            'members' => Member::all(),
+            'mangas' => Manga::all()
         ]);
     }
 
@@ -98,8 +98,8 @@ class BorrowingController extends Controller
         }
 
         $validatedData = $request->validate([
-            'customer_id' => 'required|exists:customers,id',
-            'product_id' => 'required|exists:products,id',
+            'member_id' => 'required|exists:members,id',
+            'manga_id' => 'required|exists:mangas,id',
             'borrow_date' => 'required|date',
             'due_date' => 'required|date|after_or_equal:borrow_date',
             'return_date' => 'nullable|date|after_or_equal:borrow_date',
@@ -128,3 +128,5 @@ class BorrowingController extends Controller
         return back()->with('success', 'Borrowing has been deleted.');
     }
 }
+
+

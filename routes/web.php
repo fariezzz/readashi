@@ -4,9 +4,9 @@ use App\Http\Controllers\BorrowingController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\MangaController;
+use App\Http\Controllers\GenreController;
+use App\Http\Controllers\MemberController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ChangePasswordController;
@@ -44,7 +44,7 @@ Route::middleware(['admin'])->group(function () {
     Route::post('/users', [UserController::class, 'store']);
     Route::get('/users/{user:id}', [UserController::class, 'destroy'])->name('users.delete');
 
-    Route::resource('/category', CategoryController::class);
+    Route::resource('/genre', GenreController::class);
 
 });
 
@@ -53,9 +53,12 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/profile/change-password/{user:id}', [ChangePasswordController::class, 'changePassword']);
     Route::post('/update-user/{user:username}', [UserController::class, 'update']);
     
-    Route::post('/product/update-stock/{id}', [ProductController::class, 'updateStock']);
-    Route::resource('/product', ProductController::class);
+    Route::post('/manga/update-stock/{id}', [MangaController::class, 'updateStock']);
+    Route::resource('/manga', MangaController::class);
     
-    Route::resource('/customer', CustomerController::class);
+    Route::resource('/member', MemberController::class);
     Route::resource('/borrowing', BorrowingController::class);
 });                                                
+
+
+

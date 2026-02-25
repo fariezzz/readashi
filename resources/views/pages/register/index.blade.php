@@ -26,7 +26,7 @@
   <div class="mb-4">
     <select name="role" id="role">
       <option value="Admin">Admin</option>
-      <option value="Cashier">Cashier</option>
+      <option value="Staff">Staff</option>
     </select>
   </div>
   <button class="btn btn-primary w-100 py-2" type="submit">Register</button>

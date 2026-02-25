@@ -5,9 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 use App\Models\User;
-use App\Models\Category;
-use App\Models\Customer;
-use App\Models\Product;
+use App\Models\Manga;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,7 +15,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(CategorySeeder::class);
+        $this->call(GenreSeeder::class);
         
         User::factory()->create([
             'name' => 'Muhammad Fariez',
@@ -32,8 +30,11 @@ class DatabaseSeeder extends Seeder
             'email' => 'cihilxd46@gmail.com',
             'username' => 'rajameme',
             'password' => bcrypt('12345'),
-            'role' => 'Cashier'
+            'role' => 'Staff'
         ]);
 
+        Manga::factory(40)->create();
     }
 }
+
+

@@ -15,10 +15,11 @@ class Admin
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->guest() || auth()->user()->role == 'Cashier'){
+        if(auth()->guest() || auth()->user()->role == 'Staff'){
             return back();
         }
 
         return $next($request);
     }
 }
+

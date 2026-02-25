@@ -4,7 +4,7 @@
 
 <div class="mx-3 container-fluid mb-5">
   <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 mt-2 pb-2 mb-3 border-bottom header">
-      <h3>Category List</h3>
+      <h3>Genre List</h3>
   </div>
 
   @include('partials.alert')
@@ -23,12 +23,12 @@
     </div>
   @enderror
 
-  <button class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#addCategoryModal">
-    <i class="bi bi-plus-circle"></i> Add Category
+  <button class="btn btn-primary mb-4" data-bs-toggle="modal" data-bs-target="#addGenreModal">
+    <i class="bi bi-plus-circle"></i> Add Genre
   </button>
 
-  @if($categories->count())
-    <table class="table table-bordered align-middle text-center" id="category-table" style="border-color:rgb(194, 194, 194);">
+  @if($genres->count())
+    <table class="table table-bordered align-middle text-center" id="genre-table" style="border-color:rgb(194, 194, 194);">
       <thead>
         <tr>
           <th scope="col" class="table-primary align-middle text-center">#</th>
@@ -38,45 +38,45 @@
         </tr>
       </thead>
       <tbody>
-        @foreach($categories as $category)
+        @foreach($genres as $genre)
           <tr>
             <td scope="row" class="text-center">{{ $loop->iteration }}</td>
-            <td>{{ $category->name }}</td>
-            <td data-order="{{ $category->products->count() }}" class="text-center">
-              {{ $category->products->count() }}
+            <td>{{ $genre->name }}</td>
+            <td data-order="{{ $genre->mangas->count() }}" class="text-center">
+              {{ $genre->mangas->count() }}
             </td>
             <td scope="col" class="d-flex justify-content-center">
-              <button href="#" class="btn btn-warning editButton" data-bs-toggle="modal" data-bs-target="#editCategoryModal{{ $category->id }}">
+              <button href="#" class="btn btn-warning editButton" data-bs-toggle="modal" data-bs-target="#editGenreModal{{ $genre->id }}">
                 <i class="bi bi-pencil-square"></i>
               </button>
 
-              <div class="modal fade text-start" id="editCategoryModal{{ $category->id }}" tabindex="-1" aria-labelledby="editCategoryModalLabel" aria-hidden="true">
+              <div class="modal fade text-start" id="editGenreModal{{ $genre->id }}" tabindex="-1" aria-labelledby="editGenreModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                   <div class="modal-content">
                     <div class="modal-header">
-                      <h5 class="modal-title" id="editCategoryModalLabel">Edit Category</h5>
+                      <h5 class="modal-title" id="editGenreModalLabel">Edit Genre</h5>
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                      <form class="myForm" id="editCategoryForm" method="POST" action="/category/{{ $category->slug }}">
+                      <form class="myForm" id="editGenreForm" method="POST" action="/genre/{{ $genre->slug }}">
                         @csrf
                         @method('PUT')
                         <div class="mb-3">
                           <label for="editName" class="form-label">Name</label>
-                          <input type="text" class="form-control editName" id="editName" name="name" value="{{ $category->name }}" required>
+                          <input type="text" class="form-control editName" id="editName" name="name" value="{{ $genre->name }}" required>
                         </div>
                         <div class="mb-3">
                           <label for="editSlug" class="form-label">Slug</label>
-                          <input type="text" class="form-control editSlug" id="editSlug" name="slug" value="{{ $category->slug }}" required>
+                          <input type="text" class="form-control editSlug" id="editSlug" name="slug" value="{{ $genre->slug }}" required>
                         </div>
-                        <button type="submit" class="btn btn-primary submitButton">Update Category</button>
+                        <button type="submit" class="btn btn-primary submitButton">Update Genre</button>
                       </form>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <form action="/category/{{ $category->slug }}" method="POST">
+              <form action="/genre/{{ $genre->slug }}" method="POST">
                 @method('delete')
                 @csrf
                 <button class="btn btn-danger mx-2 deleteButton">
@@ -93,15 +93,15 @@
   @endif
 </div>
 
-<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategoryModalLabel" aria-hidden="true">
+<div class="modal fade" id="addGenreModal" tabindex="-1" aria-labelledby="addGenreModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="addCategoryModalLabel">Add Category</h5>
+        <h5 class="modal-title" id="addGenreModalLabel">Add Genre</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form class="myForm" id="addCategoryForm" method="POST" action="/category">
+        <form class="myForm" id="addGenreForm" method="POST" action="/genre">
           @csrf
           <div class="mb-3">
             <label for="name" class="form-label">Name</label>
@@ -111,7 +111,7 @@
             <label for="slug" class="form-label">Slug</label>
             <input type="text" class="form-control" id="slug" name="slug" required>
           </div>
-          <button type="submit" class="btn btn-primary submitButton">Add Category</button>
+          <button type="submit" class="btn btn-primary submitButton">Add Genre</button>
         </form>
       </div>
     </div>
@@ -120,7 +120,7 @@
 
 <script>
   $(document).ready(function () {
-    $('#category-table').DataTable({
+    $('#genre-table').DataTable({
       "columnDefs": [
         { "type": "num", "targets": 2 },
         { "orderable": false, "targets": 3 }
@@ -140,7 +140,7 @@
     });
   });
 
-  // $('#addCategoryForm').submit(function(event) {
+  // $('#addGenreForm').submit(function(event) {
   //   event.preventDefault();
 
   //   $.ajax({
@@ -148,7 +148,7 @@
   //     method: 'POST',
   //     data: $(this).serialize(),
   //     success: function(response) {
-  //       $('#addCategoryModal').modal('hide');
+  //       $('#addGenreModal').modal('hide');
   //       location.reload();
   //     },
   //     error: function(xhr, status, error) {
@@ -159,3 +159,4 @@
 </script>
       
 @endsection
+

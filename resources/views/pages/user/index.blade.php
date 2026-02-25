@@ -19,7 +19,7 @@
           <select class="form-select" name="role" id="role">
               <option value="" {{ request('role') == '' ? 'selected' : '' }}>All Roles</option>
               <option value="Admin" {{ request('role') == 'Admin' ? 'selected' : '' }}>Admin</option>
-              <option value="Cashier" {{ request('role') == 'Cashier' ? 'selected' : '' }}>Cashier</option>
+              <option value="Staff" {{ request('role') == 'Staff' ? 'selected' : '' }}>Staff</option>
           </select>
         </div>
       </form>
@@ -54,7 +54,7 @@
               <td class="text-center">{{ $user->role }}</td>
               <td>{{ $user->created_at }}</td>
               <td scope="col" class="justify-content-center text-center">
-                @if($user->role == 'Cashier')
+                @if($user->role == 'Staff')
                 <a href="{{ route('users.delete', $user->id) }}" class="btn btn-danger deleteButton">
                   <i class="bi bi-trash3"></i>
                 </a>

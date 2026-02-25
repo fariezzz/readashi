@@ -4,7 +4,7 @@
 
 <div class="mx-3 container-fluid mb-5">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 mt-2 pb-2 mb-3 border-bottom header">
-        <h3>Item List</h3>
+        <h3>Manga List</h3>
     </div>
 
     @include('partials.alert')
@@ -15,18 +15,18 @@
         <div class="row justify-content-between mb-3">
             <div class="col-lg-6">
                 @can('admin')
-                <a href="/product/create" class="btn btn-primary mb-3">
+                <a href="/manga/create" class="btn btn-primary mb-3">
                     <i class="bi bi-plus-circle"></i> Add Item
                 </a>
                 @endcan
             </div>
             <div class="col-lg-6">
-                <form action="/product" method="GET" class="row g-3" id="productFilterForm">
+                <form action="/manga" method="GET" class="row g-3" id="mangaFilterForm">
                     <div class="col-lg-6">
-                        <select class="form-select" name="category" id="selectCategory">
-                            <option value="">All Categories</option>
-                            @foreach($categories as $category)
-                                <option value="{{ $category->slug }}" {{ Request::input('category') == $category->slug ? 'selected' : '' }}>{{ $category->name }}</option>
+                        <select class="form-select" name="genre" id="selectGenre">
+                            <option value="">All Genres</option>
+                            @foreach($genres as $genre)
+                                <option value="{{ $genre->slug }}" {{ Request::input('genre') == $genre->slug ? 'selected' : '' }}>{{ $genre->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -44,44 +44,45 @@
         </div>
 
         <div class="my-2">
-            {{ $products->links() }}
+            {{ $mangas->links() }}
         </div>
         
-        <div class="row" id="productList">
-            @if($products->count())
-                @foreach ($products as $product)
-                    <div class="col-lg-4 col-md-6 mb-3" data-category="{{ $product->category->slug }}">
+        <div class="row" id="mangaList">
+            @if($mangas->count())
+                @foreach ($mangas as $manga)
+                    <div class="col-lg-3 col-md-6 mb-3" data-genre="{{ $manga->genre->slug }}">
                         <div class="card shadow-sm h-100">
-                            @if($product->image)
-                                <img src="{{ asset('storage/' . $product->image) }}" class="card-img-top h-100" style="object-fit: cover;" alt="{{ $product->name }}">
+                            @if($manga->image)
+                                <img src="{{ asset('storage/' . $manga->image) }}" class="card-img-top h-100" style="object-fit: cover;" alt="{{ $manga->name }}">
                             @else
-                                <img src="{{ asset('storage/product-default.jpg') }}" class="card-img-top h-100" style="object-fit: cover;" alt="{{ $product->name }}">
+                                <img src="{{ asset('default-cover.png') }}" class="card-img-top h-100" style="object-fit: cover;" alt="{{ $manga->name }}">
                             @endif
                     
                             <div class="card-body">
-                                <h5 class="card-title">{{ $product->name }}</h5>
-                                <span class="card-text">Price: Rp. {{ number_format($product->price, 0, ',', '.') }}</span><br>
-                                <span class="{{ $product->stock > 0 ? 'card-text' : 'text-danger'}}">Stock: {{ $product->stock }}</span>
+                                <h5 class="card-title">{{ $manga->name }}</h5>
+                                <span class="card-text">Author: {{ $manga->author }}</span><br>
+                                <span class="card-text">Year: {{ $manga->published_year ?? '-' }}</span><br>
+                                <span class="{{ $manga->stock > 0 ? 'card-text' : 'text-danger'}}">Available Copies: {{ $manga->stock }}</span>
                             </div>
                     
                             <div class="card-footer">
                                 <div class="d-flex justify-content-center">
-                                    <button type="button" class="btn btn-primary mx-2 btn-detail" data-code="{{ $product->code }}" data-name="{{ $product->name }}" data-category="{{ $product->category->name }}" data-description="{{ $product->description }}" data-stock="{{ $product->stock }}" data-price="{{ $product->price }}">
+                                    <button type="button" class="btn btn-primary mx-2 btn-detail" data-code="{{ $manga->code }}" data-name="{{ $manga->name }}" data-genre="{{ $manga->genre->name }}" data-author="{{ $manga->author }}" data-publisher="{{ $manga->publisher }}" data-published-year="{{ $manga->published_year }}" data-synopsis="{{ $manga->synopsis }}" data-stock="{{ $manga->stock }}">
                                         <i class="bi bi-eye"></i>{{ auth()->user()->role == 'Admin' ? '' : ' Details' }}
                                     </button>
 
-                                    @if(auth()->user()->role == 'Cashier')
-                                    <button type="button" class="btn btn-warning mx-2" data-stock="{{ $product->stock }}" data-bs-toggle="modal" data-bs-target="#updateStock{{ $product->id }}">
+                                    @if(auth()->user()->role == 'Staff')
+                                    <button type="button" class="btn btn-warning mx-2" data-stock="{{ $manga->stock }}" data-bs-toggle="modal" data-bs-target="#updateStock{{ $manga->id }}">
                                         <i class="bi bi-plus-circle"></i> Stock
                                     </button>
                                     @endif
                     
                                     @can('admin')
-                                    <a href="/product/{{ encrypt($product->code) }}/edit" class="btn btn-warning mx-2">
+                                    <a href="/manga/{{ encrypt($manga->code) }}/edit" class="btn btn-warning mx-2">
                                         <i class="bi bi-pencil-square"></i>
                                     </a>
                     
-                                    <form action="/product/{{ $product->code }}" method="POST" class="d-inline">
+                                    <form action="/manga/{{ $manga->code }}" method="POST" class="d-inline">
                                         @method('delete')
                                         @csrf
                                         <button class="btn btn-danger mx-2 deleteButton">
@@ -90,19 +91,19 @@
                                     </form>
                                     @endcan
 
-                                    <div class="modal fade" id="updateStock{{ $product->id }}" tabindex="-1" aria-labelledby="updateStock{{ $product->id }}Label" aria-hidden="true">
+                                    <div class="modal fade" id="updateStock{{ $manga->id }}" tabindex="-1" aria-labelledby="updateStock{{ $manga->id }}Label" aria-hidden="true">
                                         <div class="modal-dialog">
                                           <div class="modal-content">
                                             <div class="modal-header">
-                                              <h5 class="modal-title" id="updateStock{{ $product->id }}Label">Update Stock</h5>
+                                              <h5 class="modal-title" id="updateStock{{ $manga->id }}Label">Update Stock</h5>
                                               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                              <form method="POST" action="/product/update-stock/{{ $product->id }}">
+                                              <form method="POST" action="/manga/update-stock/{{ $manga->id }}">
                                                 @csrf
                                                 <div class="mb-3">
                                                   <label class="form-label">Stock</label>
-                                                  <input type="number" class="form-control" name="stock" value="{{ $product->stock }}" autofocus required>
+                                                  <input type="number" class="form-control" name="stock" value="{{ $manga->stock }}" autofocus required>
                                                 </div>
                                                 <button type="submit" class="btn btn-primary">Update Stock</button>
                                               </form>
@@ -134,12 +135,16 @@
                     <div class="col-md-6">
                         <p><strong>Name:</strong> <span id="detailName"></span></p>
                         <p><strong>Code:</strong> <span id="detailCode"></span></p>
-                        <p><strong>Category:</strong> <span id="detailCategory"></span></p>
+                        <p><strong>Genre:</strong> <span id="detailGenre"></span></p>
+                        <p><strong>Author:</strong> <span id="detailAuthor"></span></p>
                     </div>
                     <div class="col-md-6">
-                        <p><strong>Description:</strong> <span id="detailDescription"></span></p>
-                        <p><strong>Stock:</strong> <span id="detailStock"></span></p>
-                        <p><strong>Price:</strong> <span id="detailPrice"></span></p>
+                        <p><strong>Publisher:</strong> <span id="detailPublisher"></span></p>
+                        <p><strong>Published Year:</strong> <span id="detailPublishedYear"></span></p>
+                        <p><strong>Available Copies:</strong> <span id="detailStock"></span></p>
+                    </div>
+                    <div class="col-12">
+                        <p><strong>Synopsis:</strong> <span id="detailSynopsis"></span></p>
                     </div>
                 </div>
             </div>
@@ -193,49 +198,41 @@
   
 <script>
     $(document).ready(function() {
-        $('#category').change(function() {
-            filterProducts();
-        });
-
-        $('#search').on('input', function() {
-            filterProducts();
-        });
-
-        function formatNumber(num) {
-            return new Intl.NumberFormat('id-ID').format(num);
-        }
-
         $('.btn-detail').click(function() {
             let name = $(this).data('name');
             let code = $(this).data('code');
-            let category = $(this).data('category');
-            let description = $(this).data('description');
+            let genre = $(this).data('genre');
+            let author = $(this).data('author');
+            let publisher = $(this).data('publisher');
+            let publishedYear = $(this).data('published-year');
+            let synopsis = $(this).data('synopsis');
             let stock = $(this).data('stock');
-            let price = $(this).data('price');
 
             $('#detailName').text(name);
             $('#detailCode').text(code);
-            $('#detailCategory').text(category);
-            $('#detailDescription').text(description);
+            $('#detailGenre').text(genre);
+            $('#detailAuthor').text(author ?? '-');
+            $('#detailPublisher').text(publisher ?? '-');
+            $('#detailPublishedYear').text(publishedYear ?? '-');
+            $('#detailSynopsis').text(synopsis ?? '-');
             $('#detailStock').text(stock);
-            $('#detailPrice').text('Rp. ' + formatNumber(price));
 
             $('#detailsModal').modal('show');
         });
 
-        $('#selectCategory').change(function() {
-            $('#productFilterForm').submit();
+        $('#selectGenre').change(function() {
+            $('#mangaFilterForm').submit();
         });
 
-        // function filterProducts() {
-        //     let category = $('#category').val().toLowerCase();
+        // function filterMangas() {
+        //     let genre = $('#selectGenre').val().toLowerCase();
         //     let searchText = $('#search').val().toLowerCase();
 
-        //     $('#productList .col-md-4').each(function() {
-        //         let productCategory = $(this).data('category').toLowerCase();
-        //         let productName = $(this).find('.card-title').text().toLowerCase();
+        //     $('#mangaList .col-md-4').each(function() {
+        //         let mangaGenre = $(this).data('genre').toLowerCase();
+        //         let mangaName = $(this).find('.card-title').text().toLowerCase();
 
-        //         if ((category === '' || productCategory === category) && (searchText === '' || productName.includes(searchText))) {
+        //         if ((genre === '' || mangaGenre === genre) && (searchText === '' || mangaName.includes(searchText))) {
         //             $(this).show(); 
         //         } else {
         //             $(this).hide();
@@ -246,3 +243,4 @@
 </script>
 
 @endsection
+

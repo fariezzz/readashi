@@ -33,7 +33,7 @@
           <label for="role" class="form-label">Role</label>
             <select class="form-select" name="role" id="role">
               <option value="Admin" {{ old('role', request('role')) === 'Admin' ? 'selected' : ''}}>Admin</option>
-              <option value="Cashier" {{ old('role', request('role')) === 'Cashier' ? 'selected' : ''}}>Cashier</option>
+              <option value="Staff" {{ old('role', request('role')) === 'Staff' ? 'selected' : ''}}>Staff</option>
             </select>
         </div>
 
@@ -82,3 +82,4 @@
 </script>
 
 @endsection
+

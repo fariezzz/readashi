@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\Category;
+use App\Models\Genre;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
 
-class CategorySeeder extends Seeder
+class GenreSeeder extends Seeder
 {
     public function run(): void
     {
@@ -22,10 +22,11 @@ class CategorySeeder extends Seeder
         ];
 
         foreach ($genres as $genre) {
-            Category::create([
+            Genre::create([
                 'name' => $genre,
                 'slug' => Str::slug($genre),
             ]);
         }
     }
 }
+

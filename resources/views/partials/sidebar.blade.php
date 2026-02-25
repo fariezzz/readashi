@@ -33,25 +33,25 @@
             @endcan
 
             <li class="sidebar-item">
-                <a href="/product" class="sidebar-link {{ Request::is('product*') ? 'link-active' : '' }}">
-                    <i class="bi bi-box-fill"></i>
-                    <span>Products</span>
+                <a href="/manga" class="sidebar-link {{ Request::is('manga*') ? 'link-active' : '' }}">
+                    <i class="bi bi-book"></i>
+                    <span>Mangas</span>
                 </a>
             </li>
             
             @can('admin')
             <li class="sidebar-item">
-                <a href="/category" class="sidebar-link {{ Request::is('category*') ? 'link-active' : '' }}">
+                <a href="/genre" class="sidebar-link {{ Request::is('genre*') ? 'link-active' : '' }}">
                     <i class="bi bi-tags-fill"></i>
-                    <span>Categories</span>
+                    <span>Genres</span>
                 </a>
             </li>
             @endcan
 
             <li class="sidebar-item">
-                <a href="/customer" class="sidebar-link {{ Request::is('customer*') ? 'link-active' : '' }}">
+                <a href="/member" class="sidebar-link {{ Request::is('member*') ? 'link-active' : '' }}">
                     <i class="bi bi-people-fill"></i>
-                    <span>Customers</span>
+                    <span>Members</span>
                 </a>
             </li>
 
@@ -80,3 +80,5 @@
         </div>
     </aside>
 {{-- </div> --}}
+
+

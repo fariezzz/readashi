@@ -4,12 +4,12 @@
 
 <div class="mx-3 container-fluid">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 mt-2 pb-2 mb-3 border-bottom">
-      <h3>Add Customer</h3>
+      <h3>Add Member</h3>
     </div>
     
     <div class="col-lg-12 container-fluid">
-      <a href="/customer" class="btn btn-primary mb-3"><i class="bi bi-arrow-left"></i> Back</a>
-      <form class="row g-3 myForm" method="POST" action="/customer">
+      <a href="/member" class="btn btn-primary mb-3"><i class="bi bi-arrow-left"></i> Back</a>
+      <form class="row g-3 myForm" method="POST" action="/member">
         @csrf
         <div class="col-lg-6">
           <label for="name" class="form-label">Name</label>

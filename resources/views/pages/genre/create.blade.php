@@ -4,12 +4,12 @@
 
 <div class="mx-3 container-fluid">
     <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 mt-2 pb-2 mb-3 border-bottom">
-      <h3>Add Category</h3>
+      <h3>Add Genre</h3>
     </div>
     
     <div class="col-lg-12 container-fluid">
-      <a href="/category" class="btn btn-primary mb-3"><i class="bi bi-arrow-left"></i> Back</a>
-      <form method="POST" action="/category" class="myForm">
+      <a href="/genre" class="btn btn-primary mb-3"><i class="bi bi-arrow-left"></i> Back</a>
+      <form method="POST" action="/genre" class="myForm">
         @csrf
         <div class="row mb-3">
             <div class="col-lg-6">

@@ -11,13 +11,14 @@ class Borrowing extends Model
 
     protected $guarded = ['id'];
 
-    public function customer()
+    public function member()
     {
-        return $this->belongsTo(Customer::class);
+        return $this->belongsTo(Member::class);
     }
 
-    public function product()
+    public function manga()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsTo(Manga::class);
     }
 }
+

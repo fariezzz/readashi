@@ -22,8 +22,8 @@
     <thead>
       <tr>
         <th scope="col" class="table-primary align-middle">#</th>
-        <th scope="col" class="table-primary align-middle">Customer</th>
-        <th scope="col" class="table-primary align-middle">Product</th>
+        <th scope="col" class="table-primary align-middle">Member</th>
+        <th scope="col" class="table-primary align-middle">Manga</th>
         <th scope="col" class="table-primary align-middle">Borrowing Date</th>
         <th scope="col" class="table-primary align-middle">Due Date</th>
         <th scope="col" class="table-primary align-middle">Return Date</th>
@@ -38,8 +38,8 @@
       @foreach($borrowings as $borrowing)
       <tr>
         <td class="text-center">{{ $loop->iteration }}</td>
-        <td>{{ $borrowing->customer->name ?? '-' }}</td>
-        <td>{{ $borrowing->product->name ?? '-' }}</td>
+        <td>{{ $borrowing->member->name ?? '-' }}</td>
+        <td>{{ $borrowing->manga->name ?? '-' }}</td>
         <td>{{ $borrowing->borrow_date ?? '-' }}</td>
         <td>{{ $borrowing->due_date ?? '-' }}</td>
         <td>{{ $borrowing->return_date ?? '-' }}</td>
@@ -84,3 +84,4 @@
 </script>
 
 @endsection
+

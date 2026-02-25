@@ -14,33 +14,33 @@
       <form class="row g-3 myForm" method="POST" action="/borrowing">
         @csrf
         <div class="col-lg-6">
-          <label for="customer_id" class="form-label">Customer</label>
-          <select class="form-select searchable-select @error('customer_id') is-invalid @enderror" name="customer_id" id="customer_id">
-            <option value="">Select customer</option>
-            @foreach($customers as $customer)
-              @if(old('customer_id') == $customer->id)
-                <option value="{{ $customer->id }}" selected>{{ $customer->name }}</option>
+          <label for="member_id" class="form-label">Member</label>
+          <select class="form-select searchable-select @error('member_id') is-invalid @enderror" name="member_id" id="member_id">
+            <option value="">Select Member</option>
+            @foreach($members as $member)
+              @if(old('member_id') == $member->id)
+                <option value="{{ $member->id }}" selected>{{ $member->name }}</option>
               @else
-                <option value="{{ $customer->id }}">{{ $customer->name }}</option>
+                <option value="{{ $member->id }}">{{ $member->name }}</option>
               @endif
             @endforeach
           </select>
-          @error('customer_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+          @error('member_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
 
         <div class="col-lg-6">
-          <label for="product_id" class="form-label">Product</label>
-          <select class="form-select searchable-select @error('product_id') is-invalid @enderror" name="product_id" id="product_id">
-            <option value="">Select product</option>
-            @foreach($products as $product)
-              @if(old('product_id') == $product->id)
-                <option value="{{ $product->id }}" selected>{{ $product->name }}</option>
+          <label for="manga_id" class="form-label">Manga</label>
+          <select class="form-select searchable-select @error('manga_id') is-invalid @enderror" name="manga_id" id="manga_id">
+            <option value="">Select Manga</option>
+            @foreach($mangas as $manga)
+              @if(old('manga_id') == $manga->id)
+                <option value="{{ $manga->id }}" selected>{{ $manga->name }}</option>
               @else
-                <option value="{{ $product->id }}">{{ $product->name }}</option>
+                <option value="{{ $manga->id }}">{{ $manga->name }}</option>
               @endif
             @endforeach
           </select>
-          @error('product_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
+          @error('manga_id')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
 
         <div class="col-lg-4">
@@ -97,3 +97,5 @@
 </script>
 
 @endsection
+
+

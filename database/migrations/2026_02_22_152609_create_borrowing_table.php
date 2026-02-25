@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('borrowings', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('customer_id');
+            $table->unsignedBigInteger('manga_id');
+            $table->unsignedBigInteger('member_id');
             $table->date('borrow_date');
             $table->date('due_date');
             $table->date('return_date')->nullable();
@@ -22,8 +22,8 @@ return new class extends Migration
             $table->enum('status', ['borrowed', 'returned', 'late'])->default('borrowed');
             $table->timestamps();
 
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('customer_id')->references('id')->on('customers')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('manga_id')->references('id')->on('mangas')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreign('member_id')->references('id')->on('members')->onDelete('cascade')->onUpdate('cascade');
         });
     }
 
@@ -35,3 +35,5 @@ return new class extends Migration
         Schema::dropIfExists('borrowings');
     }
 };
+
+

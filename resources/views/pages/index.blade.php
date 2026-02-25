@@ -19,8 +19,8 @@
         <div class="col-md-4 mb-3">
             <div class="card shadow h-100">
                 <div class="card-body">
-                    <h5 class="card-title"><i class="bi bi-box-fill"></i> Total Products</h5>
-                    <p class="card-text" style="font-size: 24px;">{{ $products->count() }}</p>
+                    <h5 class="card-title"><i class="bi bi-box-fill"></i> Total Mangas</h5>
+                    <p class="card-text" style="font-size: 24px;">{{ $mangas->count() }}</p>
                 </div>
             </div>
         </div>
@@ -63,9 +63,9 @@
         <div class="col-12">
             <div class="card shadow h-100">
                 <div class="card-body">
-                    <h5 class="card-title mb-3">Products Per Category</h5>
+                    <h5 class="card-title mb-3">Mangas Per Genre</h5>
                     <div style="height: 320px;">
-                        <canvas id="productsPerCategoryChart"></canvas>
+                        <canvas id="mangasPerGenreChart"></canvas>
                     </div>
                 </div>
             </div>
@@ -79,8 +79,8 @@
     const monthlyBorrowingData = @json($monthlyBorrowingData);
     const borrowingStatusLabels = @json($borrowingStatusLabels);
     const borrowingStatusData = @json($borrowingStatusData);
-    const productsPerCategoryLabels = @json($productsPerCategoryLabels);
-    const productsPerCategoryData = @json($productsPerCategoryData);
+    const mangasPerGenreLabels = @json($mangasPerGenreLabels);
+    const mangasPerGenreData = @json($mangasPerGenreData);
 
     new Chart(document.getElementById('borrowTrendChart'), {
         type: 'line',
@@ -131,13 +131,13 @@
         }
     });
 
-    new Chart(document.getElementById('productsPerCategoryChart'), {
+    new Chart(document.getElementById('mangasPerGenreChart'), {
         type: 'bar',
         data: {
-            labels: productsPerCategoryLabels,
+            labels: mangasPerGenreLabels,
             datasets: [{
-                label: 'Total Products',
-                data: productsPerCategoryData,
+                label: 'Total Mangas',
+                data: mangasPerGenreData,
                 backgroundColor: '#0d6efd'
             }]
         },
@@ -157,3 +157,5 @@
 </script>
 
 @endsection
+
+

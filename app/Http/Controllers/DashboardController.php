@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Borrowing;
-use App\Models\Category;
+use App\Models\Genre;
 use App\Models\User;
-use App\Models\Product;
+use App\Models\Manga;
 use Carbon\Carbon;
 
 class DashboardController extends Controller
@@ -13,14 +13,14 @@ class DashboardController extends Controller
     public function index()
     {
         $users = User::all();
-        $products = Product::all();
+        $mangas = Manga::all();
         $borrowings = Borrowing::all();
 
-        $productsPerCategory = Category::withCount('products')
+        $mangasPerGenre = Genre::withCount('mangas')
             ->get()
-            ->map(fn ($category) => [
-                'label' => $category->name,
-                'total' => $category->products_count,
+            ->map(fn ($genre) => [
+                'label' => $genre->name,
+                'total' => $genre->mangas_count,
             ]);
 
         $statusMap = ['borrowed' => 0, 'returned' => 0, 'late' => 0];
@@ -52,10 +52,10 @@ class DashboardController extends Controller
         return view('pages.index', [
             'title' => 'Dashboard',
             'users' => $users,
-            'products' => $products,
+            'mangas' => $mangas,
             'borrowings' => $borrowings,
-            'productsPerCategoryLabels' => $productsPerCategory->pluck('label')->values(),
-            'productsPerCategoryData' => $productsPerCategory->pluck('total')->values(),
+            'mangasPerGenreLabels' => $mangasPerGenre->pluck('label')->values(),
+            'mangasPerGenreData' => $mangasPerGenre->pluck('total')->values(),
             'borrowingStatusLabels' => ['Borrowed', 'Returned', 'Late'],
             'borrowingStatusData' => [
                 $statusMap['borrowed'],
@@ -67,3 +67,6 @@ class DashboardController extends Controller
         ]);
     }
 }
+
+
+
