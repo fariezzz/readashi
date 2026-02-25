@@ -10,7 +10,7 @@
         <div class="col-md-4 mb-3">
             <div class="card shadow h-100">
                 <div class="card-body">
-                    <h5 class="card-title"><i class="bi bi-people-fill"></i> Total Users</h5>
+                    <h5 class="card-title"><i class="bi bi-people"></i> Total Users</h5>
                     <p class="card-text" style="font-size: 24px;">{{ $users->count() }}</p>
                 </div>
             </div>
@@ -19,7 +19,7 @@
         <div class="col-md-4 mb-3">
             <div class="card shadow h-100">
                 <div class="card-body">
-                    <h5 class="card-title"><i class="bi bi-box-fill"></i> Total Mangas</h5>
+                    <h5 class="card-title"><i class="bi bi-book"></i> Total Mangas</h5>
                     <p class="card-text" style="font-size: 24px;">{{ $mangas->count() }}</p>
                 </div>
             </div>
