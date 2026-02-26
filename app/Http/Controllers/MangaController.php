@@ -18,7 +18,7 @@ class MangaController extends Controller
     {
         return view('pages.manga.index', [
             'title' => 'Manga List',
-            'mangas' => Manga::latest()->filter(request(['search', 'genre']))->with('genre')->paginate(6)->withQueryString(),
+            'mangas' => Manga::latest()->filter(request(['search', 'genre']))->with('genre')->paginate(8)->withQueryString(),
             'genres' => Genre::all()
         ]);
     }
