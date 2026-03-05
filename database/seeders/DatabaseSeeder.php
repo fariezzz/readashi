@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
 use App\Models\User;
 use App\Models\Manga;
 use App\Models\Member;
@@ -11,9 +9,6 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
         $this->call(GenreSeeder::class);
@@ -37,7 +32,6 @@ class DatabaseSeeder extends Seeder
         // Dummy data users dan members
         User::factory(20)->create();
         Member::factory(30)->create();
-
         Manga::factory(40)->create();
     }
 }

@@ -11,6 +11,11 @@ class Member extends Model
 
     protected $guarded = ['id'];
 
+    public function borrowings()
+    {
+        return $this->hasMany(Borrowing::class);
+    }
+
     public function scopeFilter($query, array $filters){
         $query->when($filters['search'] ?? false, function($query, $search){
             return $query->where(function($query) use($search){

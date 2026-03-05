@@ -16,8 +16,14 @@ class Manga extends Model
         return 'code';
     }
 
-    public function genre(){
+    public function genre()
+    {
         return $this->belongsTo(Genre::class);
+    }
+
+    public function borrowings()
+    {
+        return $this->hasMany(Borrowing::class);
     }
 
     public function scopeFilter($query, array $filters){
